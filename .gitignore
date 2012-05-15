@@ -2,6 +2,7 @@
 /.project
 /.settings
 /.buildpath
+/.gitignore
 /configuration.php
 
 .DS_Store
