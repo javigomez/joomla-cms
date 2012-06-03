@@ -5,3 +5,9 @@
 /configuration.php
 
 .DS_Store
+
+tests/unit/config.php-dist
+
+tests/unit/config.php
+
+tests/unit/config.php-dist
