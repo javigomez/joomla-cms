@@ -1,7 +1,10 @@
 <?php
 /**
- * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     Joomla.Administrator
+ * @subpackage  com_languages
+ * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @since       2.5.2
  */
 
 defined('_JEXEC') or die;
@@ -9,9 +12,9 @@ defined('_JEXEC') or die;
 /**
  * Displays a list of the installed languages.
  *
- * @package		Joomla.Administrator
- * @subpackage	com_languages
- * @since		1.6
+ * @package     Joomla.Administrator
+ * @subpackage  com_languages
+ * @since       1.6
  */
 class LanguagesViewInstalled extends JViewLegacy
 {
@@ -33,12 +36,12 @@ class LanguagesViewInstalled extends JViewLegacy
 	/**
 	 * @var object pagination information
 	 */
-	protected $pagination=null;
+	protected $pagination = null;
 
 	/**
 	 * @var array languages information
 	 */
-	protected $rows=null;
+	protected $rows = null;
 
 	/**
 	 * @var object user object
@@ -47,8 +50,12 @@ class LanguagesViewInstalled extends JViewLegacy
 
 	/**
 	 * Display the view
+	 *
+	 * @param   null  $tpl  template to display
+	 *
+	 * @return mixed|void
 	 */
-	function display($tpl = null)
+	public function display($tpl = null)
 	{
 		// Get data from the model
 		$this->ftp			= $this->get('Ftp');
@@ -66,22 +73,31 @@ class LanguagesViewInstalled extends JViewLegacy
 	/**
 	 * Add the page title and toolbar.
 	 *
+	 * @return mixed|void
+	 *
 	 * @since	1.6
 	 */
 	protected function addToolbar()
 	{
-		require_once JPATH_COMPONENT.'/helpers/languages.php';
+		require_once JPATH_COMPONENT . '/helpers/languages.php';
 
 		$canDo	= LanguagesHelper::getActions();
 
 		JToolBarHelper::title(JText::_('COM_LANGUAGES_VIEW_INSTALLED_TITLE'), 'langmanager.png');
 
-		if ($canDo->get('core.edit.state')) {
+		if ($canDo->get('core.edit.state'))
+		{
 			JToolBarHelper::makeDefault('installed.setDefault');
 			JToolBarHelper::divider();
 		}
 
-		if ($canDo->get('core.admin')) {
+		if ($canDo->get('core.admin'))
+		{
+			// Add an upload button.
+			$bar = JToolBar::getInstance('toolbar');
+			$bar->appendButton('Link', 'extension', 'INSTALL_LANGUAGES', 'index.php?option=com_installer&view=languages');
+
+			JToolBarHelper::divider();
 			JToolBarHelper::preferences('com_languages');
 			JToolBarHelper::divider();
 		}

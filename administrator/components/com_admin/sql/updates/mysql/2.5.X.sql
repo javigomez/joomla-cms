@@ -16,9 +16,9 @@ WHERE NOT EXISTS (
 		`#__update_sites` 
 	WHERE 
 		location = 'http://update.joomla.org/language/translationlist.xml');
-
 # Link english lang and the Accredited translations update site for JUpdater needs
-INSERT INTO 
+# TODO insert not strict
+INSERT IGNORE INTO
 	`#__update_sites_extensions` 
 VALUES
 	(
