@@ -1227,6 +1227,9 @@ a img.calendar {
     background-image: url(../images/toolbar/icon-32-print.png);
 }
 
+.icon-32-extension {
+    background-image: url(../images/toolbar/icon-32-extension.png);
+}
 /**
  * Quick Icons
  * Also knows as Header Icons
