@@ -26,6 +26,49 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+12-Jun-2012 Jean-Marie Simonet
+ # [#28660] Fix code style errors. Thanks Jenkins and Rouven
+ # [#28632] Backport JCrypt (only with the simple chipher). Thanks Rouven
+ + [#28371] Improve user feedback during automatic version update. Thanks Mark
+ # [#28591] Content triggers in Category and Featured views only apply to first few articles. Thanks Kyle.
+
+11-Jun-2012 Jean-Marie Simonet
+ $ [#28371] Improve user feedback during automatic version update. Lang strings only!
+ # [#28652] *Strict standards administrator/components/com_config/models/application.php
+ ^ [#28380] *Normalizing Beez_20 css and js loading
+ ^ [#28642] Clean up the installation a tiny bit. Thanks Rouven
+ # [#28025] Joomla Bugfix: Exchange of wrong picture by hide.js fixed. Thanks Udo
+ ^ [#28645] Clean up the session package based on what was done in the platform. Thanks Rouven
+ $ Updating installation ini file th-TH
+
+10-Jun-2012 Jean-Marie Simonet
+ # [#28426] only a single JFormFieldColor field can exist (functionally) within a form. Thanks Dennis
+ # [#28550] Default admin user created with id 42. Thanks Ofer
+ # [#28646] *New user registration approval should only be possible when Create permission
+ # [#28639] New User Account Activation Tooltip Clarification. Thanks Matt
+ # [#28648] Backport some deprecation info to the base package. Thanks Rouven.
+
+09-Jun-2012 Jean-Marie Simonet
+ ^ [#28551] Fix some issues with exceptions. Thanks Rouven
+ + [#28176] Media formfield: show preview. Thanks Benjamin
+ + [#28383] Add the ability to limit the number of password resets within a time period. Thanks Mark
+ 
+08-Jun-2012 Jean-Marie Simonet
+ ^ [#28613] Use fewer deprecated methods. Thanks Rouven
+ ^ [#28377] Backport JDatabase::execute(). Thanks Rouven.
+ # [#28631] Bug in Codemirror plugin. Thanks Viet and Elijah
+ # [#28603] User Registration Form: Label/Field Offset by one Line. Thanks Johannes
+ # [#28525] Fix JForm::load() not replacing form field in same location. Thanks Aaron
+
+07-Jun-2012 Jean-Marie Simonet
+ $ Updating installation ini files: hr-HR, sk-SK
+ # [#28526] bug in mod_articles_news. Thanks Elin
+ # [#28420] discover_install of components does not trigger custom install method. Thanks Michael
+ # [#28192] Bug in mod_articles_news in version 1.7 and 2.5. Thanks Heikki and Ofer.
+ ^ [#28570] Backport JAccess::getActionsFrom. Thanks Michael
+ ^ [#28549] Provide legacy aliases for the MVC classes. Thanks Rouven
+ # [#28400] Help Site URL Defaulting to Version 1.6. Thanks Mark
+ 
 06-Jun-2012 Christophe Demko
  ^ [#28378] Backport JInput:def() from the platform (Rouven Weßling)
  # [#28487] Menu Item Alias does not obey Secure Setting of Aliased Item (Don Gilbert)

@@ -7,7 +7,6 @@
 
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.model');
 jimport('joomla.filesystem.file');
 require_once JPATH_INSTALLATION.'/helpers/database.php';
 
@@ -17,7 +16,7 @@ require_once JPATH_INSTALLATION.'/helpers/database.php';
  * @package		Joomla.Installation
  * @since		1.6
  */
-class JInstallationModelDatabase extends JModel
+class JInstallationModelDatabase extends JModelLegacy
 {
 
 	function initialise($options)
@@ -192,7 +191,7 @@ class JInstallationModelDatabase extends JModel
 
 			try
 			{
-				$db->query();
+				$db->execute();
 			}
 			catch (RuntimeException $e)
 			{
@@ -269,7 +268,7 @@ class JInstallationModelDatabase extends JModel
 
 				try
 				{
-					$db->query();
+					$db->execute();
 				}
 				catch (RuntimeException $e)
 				{
@@ -318,8 +317,41 @@ class JInstallationModelDatabase extends JModel
 			$this->setError(JText::sprintf('INSTL_ERROR_DB', $this->getError()));
 			return false;
 		}
+		
+		$this->postInstallSampleData($db);
 
 		return true;
+	}
+
+	/**
+	 * method to update the user id of the sample data content to the new rand user id
+	 * 
+	 * @param Database connector object $db 
+	 */
+	protected function postInstallSampleData($db) {
+		// Create the ID for the root user
+		$randUserId = mt_rand(1, 1000);
+
+		$session = JFactory::getSession();
+		$session->set('randUserId', $randUserId);
+		
+		// update all created_by field of the tables with the random user id
+		// categories (created_user_id), contact_details, content, newsfeeds, weblinks
+		$updates_array = array(
+			'categories' => 'created_user_id',
+			'contact_details' => 'created_by',
+			'content' => 'created_by',
+			'newsfeeds' => 'created_by',
+			'weblinks' => 'created_by',
+		);
+		foreach ($updates_array as $table => $field) {
+			$db->setQuery(
+				'UPDATE '.$db->quoteName('#__' . $table) .
+				' SET '.$db->quoteName($field).' = '.$db->Quote($randUserId)
+			);
+			$db->query();
+		}
+
 	}
 
 	/**
@@ -395,7 +427,7 @@ class JInstallationModelDatabase extends JModel
 
 		try
 		{
-			$db->query();
+			$db->execute();
 		}
 		catch (RuntimeException $e)
 		{
@@ -480,7 +512,7 @@ class JInstallationModelDatabase extends JModel
 
 				try
 				{
-					$db->query();
+					$db->execute();
 				}
 				catch (RuntimeException $e)
 				{
@@ -512,7 +544,7 @@ class JInstallationModelDatabase extends JModel
 
 		try
 		{
-			$db->query();
+			$db->execute();
 		}
 		catch (RuntimeException $e)
 		{

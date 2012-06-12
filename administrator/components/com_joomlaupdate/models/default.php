@@ -85,7 +85,7 @@ class JoomlaupdateModelDefault extends JModel
 			$update_site->last_check_timestamp = 0;
 			$update_site->location = $updateURL;
 			$db->updateObject('#__update_sites', $update_site, 'update_site_id');
-			
+
 			// Remove cached updates
 			$query = $db->getQuery(true)
 				->delete($db->nq('#__updates'))
@@ -515,7 +515,7 @@ ENDDATA;
 		{
 			$db->Query();
 		}
-		catch (JException $e)
+		catch (RuntimeException $e)
 		{
 			// Install failed, roll back changes
 			$installer->abort(
@@ -644,7 +644,6 @@ ENDDATA;
 		{
 			$installer->set('extension_message', $msg);
 		}
-
 
 		return true;
 	}
