@@ -25,4 +25,5 @@ defined('_JEXEC') or die;
 			<?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
 
 	</div>
-	<div class="clr"></div>
+</fieldset>
+<div class="clr"></div>

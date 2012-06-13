@@ -15,48 +15,45 @@ JHtml::_('behavior.multiselect');
 $listOrder	= $this->escape($this->state->get('list.ordering'));
 $listDirn	= $this->escape($this->state->get('list.direction'));
 
+var_dump($this->state);
 ?>
-
 <form
 	action="<?php echo JRoute::_('index.php?option=com_installer&view=languages');?>"
 	method="post" name="adminForm" id="adminForm">
 
 	<?php echo $this->loadTemplate('filter'); ?>
-
 	<div class="width-100 fltlft">
 		<fieldset>
 			<legend>
 				<?php echo JText::_('COM_INSTALLER_LANGUAGES_AVAILABLE_LANGUAGES'); ?>
 			</legend>
 
-			<table class="adminlist" cellspacing="1">
+			<table class="adminlist">
 				<thead>
 					<tr>
 						<th width="20">
-							<input type="checkbox" name="checkall-toggle"
-							value="" title="Check All" onclick="Joomla.checkAll(this)">
+							<input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" />
 						</th>
 						<th class="nowrap">
-							<a href="#"
-							onclick="Joomla.tableOrdering('name','asc','');"
-							title="Click to sort by this column">
-								Name
-							</a>
+							<?php echo JHtml::_('grid.sort', 'COM_INSTALLER_HEADING_NAME', 'name', $listDirn, $listOrder); ?>
 						</th>
 						<th width="10%" class="center">
-							Version
+							<?php echo JText::_('JVERSION'); ?>
 						</th>
 						<th>
-							Type
+							<?php echo JText::_('COM_INSTALLER_HEADING_TYPE'); ?>
 						</th>
 						<th width="35%">
-							URL Details
+							<?php echo JText::_('COM_INSTALLER_HEADING_DETAILS_URL'); ?>
+						</th>
+						<th width="10">
+							<?php echo JHtml::_('grid.sort', 'COM_INSTALLER_HEADING_ID', 'update_id', $listDirn, $listOrder); ?>
 						</th>
 					</tr>
 				</thead>
 				<tfoot>
 					<tr>
-						<td colspan="5">
+						<td colspan="6">
 							<?php echo $this->pagination->getListFooter(); ?>
 						</td>
 					</tr>
@@ -84,6 +81,9 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 						<td>
 							<?php echo $language->detailsurl; ?>
 						</td>
+						<td>
+							<?php echo $language->update_id; ?>
+						</td>
 					</tr>
 					<?php
 					}
@@ -100,4 +100,3 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 		<?php echo JHtml::_('form.token'); ?>
 	</div>
 </form>
-<div class="clr"></div>
