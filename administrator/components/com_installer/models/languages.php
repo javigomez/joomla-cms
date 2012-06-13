@@ -26,6 +26,26 @@ class InstallerModelLanguages extends JModelList
 {
 
 	/**
+	 * Constructor override, defines a white list of filters.
+	 *
+	 * @param   array  $config  An optional associative array of configuration settings.
+	 *
+	 * @see     JModelList
+	 */
+	public function __construct($config = array())
+	{
+		if (empty($config['filter_fields']))
+		{
+			$config['filter_fields'] = array(
+				'update_id', 'update_id',
+				'name', 'name',
+			);
+		}
+
+		parent::__construct($config);
+	}
+
+	/**
 	 * Method to get the available languages database query.
 	 *
 	 * @return	JDatabaseQuery	The database query
@@ -51,9 +71,10 @@ class InstallerModelLanguages extends JModelList
 			$query->where('(name LIKE ' . $search . ')');
 		}
 
-			// Add the list ordering clause.
+		// Add the list ordering clause.
+		$listOrder	= $this->state->get('list.ordering');
 		$orderDirn	= $this->state->get('list.direction');
-		$query->order('name ' . $db->escape($orderDirn));
+		$query->order($db->escape($listOrder) . ' ' . $db->escape($orderDirn));
 
 		return $query;
 	}
@@ -91,7 +112,7 @@ class InstallerModelLanguages extends JModelList
 		$value = $app->getUserStateFromRequest($this->context . '.filter.search', 'filter_search');
 		$this->setState('filter.search', $value);
 
-		// GSOC $this->setState('extension_message', $app->getUserState('com_installer.extension_message'));
+		$this->setState('extension_message', $app->getUserState('com_installer.extension_message'));
 
 		parent::populateState('name', 'asc');
 	}
