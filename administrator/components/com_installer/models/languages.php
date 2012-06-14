@@ -134,9 +134,6 @@ class InstallerModelLanguages extends JModelList
 		 */
 		$updater->findUpdates(600, $cache_timeout);
 
-		// Gsoc todo a message should be added in case of success and another in case of error for example if there is not internet connection
-		// An idea can be to check in the updates table if there is something
-		$this->_message = JText::_('gsoc');
 		return true;
 	}
 
@@ -149,7 +146,6 @@ class InstallerModelLanguages extends JModelList
 	 */
 	public function install($lids)
 	{
-		// Gsoc todo still need add more error messages
 		$app = JFactory::getApplication();
 		$installer = JInstaller::getInstance();
 
