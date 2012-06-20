@@ -26,8 +26,29 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+20-Jun-2012 Jean-Marie Simonet
+ ^ Disable install checks for development
+
+-------------------- 2.5.6 Stable Release [19-June-2012] ------------------
+
+19-Jun-2012 Mark Dexter
+ # [#28704] Menu type aliases causing fatal php error. Thanks Andrea.
+ # [#28700] Fix a potentially fatal issue in JXMLElement. Thanks Rouven.
+ # [#28698] Fatal error updating with Extension manager > Install. Thanks Michael.
+ # [#28684] JApplication::registerEvent() is not static anymore causing a fatal error
+
+19-Jun-2012 Jean-Marie Simonet
+ # [#28685] Edit article Button missing after upgrade to the latest version 2.5.5 from 2.5.4. Thanks Mark
+ $ [#28695] *Lang string missing
+ # [#28694] *Delete toolbar broken in com_media in 2.5.5
+ # [#28702] 404 Hits of com_redirect fails after Manual update. Thanks Mark
+ # [#28703] JUser class is missing the public vars for the 2 new columns lastResetTime and resetCount. Thanks Beat.
+ # [#28689] FinderController duplicate lines. Thanks Elijah
+
 18-June-2012 Mark Dexter
  + Add update xml files to build folder
+ # [#28554] Mark JXMLElement as deprecated and don't use it in type hinting
+ # [#28650] Use legacy aliases for the MVC in the site
 
 -------------------- 2.5.5 Stable Release [18-June-2012] ------------------
 
