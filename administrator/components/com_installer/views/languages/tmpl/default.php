@@ -20,7 +20,7 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 	action="<?php echo JRoute::_('index.php?option=com_installer&view=languages');?>"
 	method="post" name="adminForm" id="adminForm">
 
-	<?php if (count($this->items)) : ?>
+	<?php if (count($this->items) || $this->escape($this->state->get('filter.search'))) : ?>
 	<?php echo $this->loadTemplate('filter'); ?>
 	<div class="width-100 fltlft">
 			<table class="adminlist">
