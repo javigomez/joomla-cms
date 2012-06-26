@@ -77,6 +77,8 @@ class InstallerViewLanguages extends JView
 			JToolBarHelper::custom('languages.find', 'refresh', 'refresh', 'COM_INSTALLER_TOOLBAR_FIND_LANGUAGES', false, false);
 			JToolBarHelper::custom('languages.purge', 'purge', 'purge', 'JTOOLBAR_PURGE_CACHE', false, false);
 			JToolBarHelper::divider();
+			JToolBarHelper::preferences('com_installer');
+			JToolBarHelper::divider();
 
 			// TODO: this help screen will need to be created
 			JToolBarHelper::help('JHELP_EXTENSIONS_EXTENSION_MANAGER_LANGUAGES');
