@@ -93,7 +93,7 @@ class LanguagesViewInstalled extends JViewLegacy
 
 		if ($canDo->get('core.admin'))
 		{
-			// Add an upload button.
+			// Add install languages link to the lang installer component
 			$bar = JToolBar::getInstance('toolbar');
 			$bar->appendButton('Link', 'extension', 'INSTALL_LANGUAGES', 'index.php?option=com_installer&view=languages');
 
