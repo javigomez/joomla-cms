@@ -7,8 +7,11 @@
  * @since       2.5.2
  */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> 9402f364d1c404d318e8fc030082738ad4edad6e
 // Check to ensure this file is included in Joomla!
 >>>>>>> Alpha 1
 defined('_JEXEC') or die;
