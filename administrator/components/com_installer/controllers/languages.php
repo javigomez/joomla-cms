@@ -1,35 +1,55 @@
 <?php
 /**
- * @package		Joomla.Administrator
- * @subpackage	com_installer
- * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
- * @license		GNU General Public License, see LICENSE.php
+ * @package     Joomla.Administrator
+ * @subpackage  com_installer
+ * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License, see LICENSE.php
  */
 
 // No direct access
 defined('_JEXEC') or die;
 
 /**
- * @package		Joomla.Administrator
- * @subpackage	com_installer
+ * Languages Installer Controller
+ *
+ * @package     Joomla.Administrator
+ * @subpackage  com_installer
+ * @since       3.1
  */
-class InstallerControllerLanguages extends JController {
-
+class InstallerControllerLanguages extends JController
+{
 
 	/**
-	 * Find new updates.
+	 * Finds new Languages.
+	 *
+	 * @return  void
 	 */
-	function find()
+	public function find()
 	{
-		// TODO
+		// Check for request forgeries
+		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+
+		// Get the caching duration
+		jimport('joomla.application.component.helper');
+		$component = JComponentHelper::getComponent('com_installer');
+		$params = $component->params;
+		$cache_timeout = $params->get('cachetimeout', 6, 'int');
+		$cache_timeout = 3600 * $cache_timeout;
+
+		// Find updates
+		$model	= $this->getModel('languages');
+		$model->findLanguages($cache_timeout);
+
+		$this->setRedirect(JRoute::_('index.php?option=com_installer&view=languages', false), $model->_message);
+
 	}
 
 	/**
 	 * Purgue the updates list.
 	 *
-	 * @since	2.5
+	 * @return  void
 	 */
-	function purge()
+	public function purge()
 	{
 		// Check for request forgeries
 		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
@@ -42,11 +62,11 @@ class InstallerControllerLanguages extends JController {
 	}
 
 	/**
-	 * Install a language.
+	 * Install languages.
 	 *
-	 * @since	2.5
+	 * @return void
 	 */
-	function install()
+	public function install()
 	{
 		$model = $this->getModel('languages');
 
@@ -54,18 +74,18 @@ class InstallerControllerLanguages extends JController {
 		$lids	= JRequest::getVar('cid', array(), '', 'array');
 		JArrayHelper::toInteger($lids, array());
 
-		if (!$lids) {
+		if (!$lids)
+		{
 			// No languages have been selected
 			$app = JFactory::getApplication();
 			$app->enqueueMessage(JText::_('COM_INSTALLER_MSG_DISCOVER_NOEXTENSIONSELECTED'));
 		}
 		else
 		{
-			// install selected languages
+			// Install selected languages
 			$model->install($lids);
 		}
 
 		$this->setRedirect(JRoute::_('index.php?option=com_installer&view=languages', false));
 	}
-
 }

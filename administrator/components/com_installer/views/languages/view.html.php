@@ -1,12 +1,13 @@
 <?php
 /**
- * @package		Joomla.Administrator
- * @subpackage	com_installer
- * @copyright	Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     Joomla.Administrator
+ * @subpackage  com_installer
+ * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @since       3.1
  */
 
-// no direct access
+// No direct access
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
@@ -14,26 +15,44 @@ jimport('joomla.application.component.view');
 /**
  * Language installer view
  *
- * @package		Joomla.Administrator
- * @subpackage	com_installer
- * @since		1.6
+ * @package     Joomla.Administrator
+ * @subpackage  com_installer
+ * @since       3.1
  */
 class InstallerViewLanguages extends JView
 {
+	/**
+	 * @var object item list
+	 */
 	protected $items;
+
+	/**
+	 * @var object pagination information
+	 */
 	protected $pagination;
 
 	/**
-	 * @since	2.5.5 @TODO: the version may change when will be pulled
- 	 */
-	function display($tpl=null)
+	 * @var object model state
+	 */
+	protected $state;
+
+	/**
+	 * Display the view
+	 *
+	 * @param   null  $tpl  template to display
+	 *
+	 * @return mixed|void
+	 */
+	public function display($tpl=null)
 	{
 		// Get data from the model
+		$this->state		= $this->get('State');
 		$this->items		= $this->get('Items');
 		$this->pagination	= $this->get('Pagination');
 
 		// Check for errors.
-		if (count($errors = $this->get('Errors'))) {
+		if (count($errors = $this->get('Errors')))
+		{
 			JError::raiseError(500, implode("\n", $errors));
 			return false;
 		}
@@ -42,21 +61,25 @@ class InstallerViewLanguages extends JView
 		parent::display($tpl);
 	}
 
-
 	/**
 	 * Add the page title and toolbar.
 	 *
-	 * @since	2.5.6
+	 * @return void
 	 */
 	protected function addToolbar()
 	{
 		$canDo	= InstallerHelper::getActions();
+		JToolBarHelper::title(JText::_('COM_INSTALLER_HEADER_' . $this->getName()), 'install.png');
 
-		JToolBarHelper::custom('languages.install', 'upload', 'upload', 'COM_INSTALLER_TOOLBAR_INSTALL', true, false);
-		JToolBarHelper::custom('languages.find', 'refresh', 'refresh', 'COM_INSTALLER_TOOLBAR_FIND_LANGUAGES', false, false);
-		JToolBarHelper::custom('languages.purge', 'purge', 'purge', 'JTOOLBAR_PURGE_CACHE', false, false);
-		JToolBarHelper::divider();
+		if ($canDo->get('core.admin'))
+		{
+			JToolBarHelper::custom('languages.install', 'upload', 'upload', 'COM_INSTALLER_TOOLBAR_INSTALL', true, false);
+			JToolBarHelper::custom('languages.find', 'refresh', 'refresh', 'COM_INSTALLER_TOOLBAR_FIND_LANGUAGES', false, false);
+			JToolBarHelper::custom('languages.purge', 'purge', 'purge', 'JTOOLBAR_PURGE_CACHE', false, false);
+			JToolBarHelper::divider();
 
-		JToolBarHelper::help('JHELP_EXTENSIONS_EXTENSION_MANAGER_LANGUAGES'); //@TODO: this help screen will need to be created
+			// TODO: this help screen will need to be created
+			JToolBarHelper::help('JHELP_EXTENSIONS_EXTENSION_MANAGER_LANGUAGES');
+		}
 	}
 }
