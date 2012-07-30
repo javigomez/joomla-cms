@@ -19,7 +19,6 @@ jimport('joomla.updater.update');
 /**
  * @package		Joomla.Administrator
  * @subpackage	com_installer
- * @since	2.5.5 @TODO: the version may change when will be pulled
  */
 class InstallerModelLanguages extends JModelList
 {
@@ -51,7 +50,6 @@ class InstallerModelLanguages extends JModelList
 	{
 		$app = JFactory::getApplication();
 		$installer = JInstaller::getInstance();
-		$failed = false;
 
 		// Loop through every selected language
 		foreach($lids as $id)
@@ -62,8 +60,7 @@ class InstallerModelLanguages extends JModelList
 			if (!$remote_manifest)
 			{
 				// Could not find the url, the information in the update server may be corrupt
-				$app->enqueueMessage(JText::_('no consigo el manifest').': '. $id);
-				$failed = true;
+				$app->enqueueMessage(JText::_('COM_INSTALLER_MSG_LANGUAGES_CANT_FIND_REMOTE_MANIFEST').': '. $id);
 				continue;
 			}
 
@@ -72,8 +69,7 @@ class InstallerModelLanguages extends JModelList
 			$package_url 		= $this->_getPackageUrl($remote_manifest);
 			if (!$package_url) {
 				// Could not find the url , maybe the url is wrong in the update server, or there is not internet access
-				$app->enqueueMessage(JText::_('no consigo la url del paquete').': '. $id);
-				$failed = true;
+				$app->enqueueMessage(JText::_('COM_INSTALLER_MSG_LANGUAGES_CANT_FIND_REMOTE_PACKAGE').': '. $id);
 				continue;
 			}
 
@@ -85,7 +81,6 @@ class InstallerModelLanguages extends JModelList
 			if (!$installer->install($package['dir'])) {
 				// There was an error installing the package
 				$app->enqueueMessage(JText::sprintf('COM_INSTALLER_INSTALL_ERROR', JText::_('COM_INSTALLER_TYPE_TYPE_'.strtoupper($package['type']))));
-				$failed = true;
 				continue;
 			}
 
