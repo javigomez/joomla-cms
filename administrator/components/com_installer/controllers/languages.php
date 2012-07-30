@@ -42,7 +42,7 @@ class InstallerControllerLanguages extends JController
 		$model	= $this->getModel('languages');
 		$model->findLanguages($cache_timeout);
 
-		$this->setRedirect(JRoute::_('index.php?option=com_installer&view=languages', false), $model->_message);
+		$this->setRedirect(JRoute::_('index.php?option=com_installer&view=languages', false));
 
 	}
 
