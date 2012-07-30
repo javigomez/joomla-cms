@@ -193,6 +193,9 @@ class InstallerModelLanguages extends JModelList
 			}
 			JInstallerHelper::cleanupInstall($package['packagefile'], $package['extractdir']);
 
+			// Delete the installed language from the list
+			$instance = JTable::getInstance('update');
+			$instance->delete($id);
 		}
 	}
 
