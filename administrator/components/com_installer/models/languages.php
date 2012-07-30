@@ -104,7 +104,7 @@ class InstallerModelLanguages extends JModelList
 	 *
 	 * @return  void
 	 */
-	protected function populateState($ordering = null, $direction = null)
+	protected function populateState($ordering = 'name', $direction = 'asc')
 	{
 		// Initialise variables.
 		$app = JFactory::getApplication();
@@ -114,7 +114,7 @@ class InstallerModelLanguages extends JModelList
 
 		$this->setState('extension_message', $app->getUserState('com_installer.extension_message'));
 
-		parent::populateState('name', 'asc');
+		parent::populateState($ordering, $direction);
 	}
 
 	/**
@@ -146,8 +146,8 @@ class InstallerModelLanguages extends JModelList
 	 */
 	public function install($lids)
 	{
-		$app = JFactory::getApplication();
-		$installer = JInstaller::getInstance();
+		$app			= JFactory::getApplication();
+		$installer		= JInstaller::getInstance();
 
 		// Loop through every selected language
 		foreach ($lids as $id)
@@ -197,6 +197,7 @@ class InstallerModelLanguages extends JModelList
 			$instance = JTable::getInstance('update');
 			$instance->delete($id);
 		}
+
 	}
 
 	/**
