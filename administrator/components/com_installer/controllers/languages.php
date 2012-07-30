@@ -19,6 +19,8 @@ defined('_JEXEC') or die;
 class InstallerControllerLanguages extends JController
 {
 
+
+
 	/**
 	 * Finds new Languages.
 	 *
