@@ -20,6 +20,7 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 	action="<?php echo JRoute::_('index.php?option=com_installer&view=languages');?>"
 	method="post" name="adminForm" id="adminForm">
 
+	<?php if (count($this->items)) : ?>
 	<?php echo $this->loadTemplate('filter'); ?>
 	<div class="width-100 fltlft">
 		<fieldset>
@@ -91,6 +92,9 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 			</table>
 		</fieldset>
 	</div>
+	<?php else : ?>
+		<p class="nowarning"><?php echo JText::_('COM_INSTALLER_MSG_LANGUAGES_NOLANGUAGES'); ?></p>
+	<?php endif; ?>
 	<div>
 		<input type="hidden" name="task" value="" />
 		<input type="hidden" name="boxchecked" value="0" />
