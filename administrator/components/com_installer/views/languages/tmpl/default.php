@@ -23,11 +23,6 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 	<?php if (count($this->items) || $this->escape($this->state->get('filter.search'))) : ?>
 	<?php echo $this->loadTemplate('filter'); ?>
 	<div class="width-100 fltlft">
-		<fieldset>
-			<legend>
-				<?php echo JText::_('COM_INSTALLER_LANGUAGES_AVAILABLE_LANGUAGES'); ?>
-			</legend>
-
 			<table class="adminlist">
 				<thead>
 					<tr>
@@ -59,18 +54,14 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 					</tr>
 				</tfoot>
 				<tbody>
-					<?php
-					foreach ($this->items as $i => $language)
-					{
+					<?php foreach ($this->items as $i => $language) :
 					?>
-					<tr class="row<?php echo $i % 2; ?>">
+					<tr class="row<?php echo $i%2; ?>">
 						<td>
 							<?php echo JHtml::_('grid.id', $i, $language->update_id, false, 'cid'); ?>
 						</td>
 						<td>
-							<span class="editlinktip hasTip" title="">
-								<?php echo $language->name; ?>
-							</span>
+							<?php echo $language->name; ?>
 						</td>
 						<td class="center">
 							<?php echo $language->version; ?>
@@ -85,12 +76,9 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 							<?php echo $language->update_id; ?>
 						</td>
 					</tr>
-					<?php
-					}
-					?>
+					<?php endforeach; ?>
 				</tbody>
 			</table>
-		</fieldset>
 	</div>
 	<?php else : ?>
 		<p class="nowarning"><?php echo JText::_('COM_INSTALLER_MSG_LANGUAGES_NOLANGUAGES'); ?></p>
