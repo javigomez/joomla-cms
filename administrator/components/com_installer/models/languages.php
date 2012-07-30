@@ -26,7 +26,7 @@ class InstallerModelLanguages extends JModelList
 {
 
 	/**
-	 * Constructor override, defines a white list of filters.
+	 * Constructor override, defines a white list of column filters.
 	 *
 	 * @param   array  $config  An optional associative array of configuration settings.
 	 *
@@ -134,7 +134,8 @@ class InstallerModelLanguages extends JModelList
 		 */
 		$updater->findUpdates(600, $cache_timeout);
 
-		// Gsoc a message should be added in case of success and another in case of error for example if there is not internet connection
+		// Gsoc todo a message should be added in case of success and another in case of error for example if there is not internet connection
+		// An idea can be to check in the updates table if there is something
 		$this->_message = JText::_('gsoc');
 		return true;
 	}
@@ -148,7 +149,7 @@ class InstallerModelLanguages extends JModelList
 	 */
 	public function install($lids)
 	{
-		// Gsoc falta revisar los mensajes de error y añadir el since
+		// Gsoc todo still need add more error messages
 		$app = JFactory::getApplication();
 		$installer = JInstaller::getInstance();
 

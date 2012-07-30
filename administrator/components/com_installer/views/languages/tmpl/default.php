@@ -15,7 +15,6 @@ JHtml::_('behavior.multiselect');
 $listOrder	= $this->escape($this->state->get('list.ordering'));
 $listDirn	= $this->escape($this->state->get('list.direction'));
 
-var_dump($this->state);
 ?>
 <form
 	action="<?php echo JRoute::_('index.php?option=com_installer&view=languages');?>"
