@@ -6,11 +6,7 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  * @since       2.5.2
  */
-<<<<<<< HEAD
-
-=======
 // Check to ensure this file is included in Joomla!
->>>>>>> Alpha 1
 defined('_JEXEC') or die;
 
 /**
@@ -18,7 +14,7 @@ defined('_JEXEC') or die;
  *
  * @package     Joomla.Administrator
  * @subpackage  com_languages
- * @since       ∫1.6
+ * @since       1.6
  */
 class LanguagesViewLanguages extends JViewLegacy
 {
