@@ -10,7 +10,7 @@
 // No direct access
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.view');
+include_once dirname(__FILE__).'/../default/view.php';
 
 /**
  * Language installer view
@@ -19,7 +19,7 @@ jimport('joomla.application.component.view');
  * @subpackage  com_installer
  * @since       3.1
  */
-class InstallerViewLanguages extends JView
+class InstallerViewLanguages extends InstallerViewDefault
 {
 	/**
 	 * @var object item list
@@ -57,7 +57,6 @@ class InstallerViewLanguages extends JView
 			return false;
 		}
 
-		$this->addToolbar();
 		parent::display($tpl);
 	}
 
@@ -76,8 +75,7 @@ class InstallerViewLanguages extends JView
 			JToolBarHelper::custom('languages.install', 'upload', 'upload', 'COM_INSTALLER_TOOLBAR_INSTALL', true, false);
 			JToolBarHelper::custom('languages.find', 'refresh', 'refresh', 'COM_INSTALLER_TOOLBAR_FIND_LANGUAGES', false, false);
 			JToolBarHelper::custom('languages.purge', 'purge', 'purge', 'JTOOLBAR_PURGE_CACHE', false, false);
-			JToolBarHelper::divider();
-
+			parent::addToolbar();
 			// TODO: this help screen will need to be created
 			JToolBarHelper::help('JHELP_EXTENSIONS_EXTENSION_MANAGER_LANGUAGES');
 		}
