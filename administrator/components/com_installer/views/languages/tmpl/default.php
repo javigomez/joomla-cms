@@ -41,7 +41,7 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 						<th width="35%">
 							<?php echo JText::_('COM_INSTALLER_HEADING_DETAILS_URL'); ?>
 						</th>
-						<th width="10">
+						<th width="30">
 							<?php echo JHtml::_('grid.sort', 'COM_INSTALLER_HEADING_ID', 'update_id', $listDirn, $listOrder); ?>
 						</th>
 					</tr>
