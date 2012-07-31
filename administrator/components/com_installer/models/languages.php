@@ -152,13 +152,18 @@ class InstallerModelLanguages extends JModelList
 		// Loop through every selected language
 		foreach ($lids as $id)
 		{
+			// Loads the update database object that represents the language
+			$language = JTable::getInstance('update');
+			$language->load($id);
 
 			// Get the url to the XML manifest file of the selected language
 			$remote_manifest 	= $this->_getLanguageManifest($id);
 			if (!$remote_manifest)
 			{
 				// Could not find the url, the information in the update server may be corrupt
-				$app->enqueueMessage(JText::_('COM_INSTALLER_MSG_LANGUAGES_CANT_FIND_REMOTE_MANIFEST') . ': ' . $id);
+				$message 	= JText::sprintf('COM_INSTALLER_MSG_LANGUAGES_CANT_FIND_REMOTE_MANIFEST', $language->name);
+				$message 	.= ' ' . JText::_(COM_INSTALLER_MSG_LANGUAGES_TRY_LATER);
+				$app->enqueueMessage($message);
 				continue;
 			}
 
@@ -167,7 +172,9 @@ class InstallerModelLanguages extends JModelList
 			if (!$package_url)
 			{
 				// Could not find the url , maybe the url is wrong in the update server, or there is not internet access
-				$app->enqueueMessage(JText::_('COM_INSTALLER_MSG_LANGUAGES_CANT_FIND_REMOTE_PACKAGE') . ': ' . $id);
+				$message 	= JText::sprintf('COM_INSTALLER_MSG_LANGUAGES_CANT_FIND_REMOTE_PACKAGE', $language->name);
+				$message 	.= ' ' . JText::_(COM_INSTALLER_MSG_LANGUAGES_TRY_LATER);
+				$app->enqueueMessage($message);
 				continue;
 			}
 
@@ -178,12 +185,14 @@ class InstallerModelLanguages extends JModelList
 			if (!$installer->install($package['dir']))
 			{
 				// There was an error installing the package
-				$app->enqueueMessage(JText::sprintf('COM_INSTALLER_INSTALL_ERROR', JText::_('COM_INSTALLER_TYPE_TYPE_' . strtoupper($package['type']))));
+				$message 	= JText::sprintf('COM_INSTALLER_INSTALL_ERROR', $language->name);
+				$message 	.= ' ' . JText::_(COM_INSTALLER_MSG_LANGUAGES_TRY_LATER);
+				$app->enqueueMessage($message);
 				continue;
 			}
 
 			// Package installed successfully
-			$app->enqueueMessage(JText::sprintf('COM_INSTALLER_INSTALL_SUCCESS', JText::_('COM_INSTALLER_TYPE_TYPE_' . strtoupper($package['type']))));
+			$app->enqueueMessage(JText::sprintf('COM_INSTALLER_INSTALL_SUCCESS', $language->name));
 
 			// Cleanup the install files in tmp folder
 			if (!is_file($package['packagefile']))
@@ -194,8 +203,7 @@ class InstallerModelLanguages extends JModelList
 			JInstallerHelper::cleanupInstall($package['packagefile'], $package['extractdir']);
 
 			// Delete the installed language from the list
-			$instance = JTable::getInstance('update');
-			$instance->delete($id);
+			$language->delete($id);
 		}
 
 	}
