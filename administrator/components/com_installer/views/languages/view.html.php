@@ -4,7 +4,11 @@
  * @subpackage  com_installer
  * @copyright   Copyright (C) 2005 - 2012 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
+<<<<<<< HEAD
  * @since       2.5.7
+=======
+ * @since       3.1
+>>>>>>> 911b10685cdeb237d1d6bff6d7ba42b5ab3a494c
  */
 
 // No direct access
