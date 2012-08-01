@@ -95,7 +95,7 @@ class LanguagesViewInstalled extends JViewLegacy
 		{
 			// Add install languages link to the lang installer component
 			$bar = JToolBar::getInstance('toolbar');
-			$bar->appendButton('Link', 'extension', 'INSTALL_LANGUAGES', 'index.php?option=com_installer&view=languages');
+			$bar->appendButton('Link', 'extension', 'COM_LANGUAGES_INSTALL', 'index.php?option=com_installer&view=languages');
 
 			JToolBarHelper::divider();
 			JToolBarHelper::preferences('com_languages');
