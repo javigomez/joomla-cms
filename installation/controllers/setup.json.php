@@ -688,6 +688,7 @@ class InstallationControllerSetup extends JControllerLegacy
 		$app = JFactory::getApplication();
 		$app->close();
 	}
+
 }
 
 /**

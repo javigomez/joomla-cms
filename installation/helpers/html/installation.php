@@ -49,6 +49,31 @@ class JHtmlInstallation
 	}
 
 	/**
+	 * Method to generate the side bar
+	 *
+	 * @return  string  Markup for the side bar
+	 *
+	 * @since   3.0
+	 */
+	public static function stepbarlanguages()
+	{
+
+		$tabs = array();
+		$tabs[] = 'languages';
+		$tabs[] = 'defaultlanguage';
+		$tabs[] = 'complete';
+
+		$html = array();
+		$html[] = '<ul class="nav nav-tabs">';
+		foreach ($tabs as $tab)
+		{
+			$html[] = self::getTab($tab, $tabs);
+		}
+		$html[] = '</ul>';
+		return implode('', $html);
+	}
+
+	/**
 	 * @param   string  $id
 	 * @param   array   $tabs
 	 *

@@ -327,6 +327,7 @@ var Installation = new Class({
  	 */
 	removeFolder: function(el) {
 		el = document.id(el);
+        document.id('instLangs').set('disabled','disabled');
 		var req = new Request.JSON({
 			method: 'get',
 			url: 'index.php?'+document.id(el.form).toQueryString(),
