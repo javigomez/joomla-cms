@@ -121,14 +121,10 @@ class InstallationControllerLanguages extends InstallationControllerSetup
 		{
 			// Create a response body.
 			$r->text = JText::_('INSTL_DEFAULTLANGUAGE_COULDNT_SET_DEFAULT');
-			$r->view = 'complete';
-
-			// Send the response.
-			$this->sendResponse($r);
 		}
 
 		// Create a response body.
-		$r->view = 'complete';
+		$r->view = 'remove';
 
 		// Send the response.
 		$this->sendResponse($r);
