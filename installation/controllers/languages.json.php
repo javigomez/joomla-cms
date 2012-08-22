@@ -6,7 +6,7 @@
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die;
-include_once __DIR__ . '/setup.json.php';
+require_once __DIR__ . '/setup.json.php';
 
 
 /**

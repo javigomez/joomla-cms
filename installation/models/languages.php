@@ -10,6 +10,7 @@
 
 defined('_JEXEC') or die;
 
+jimport('joomla.updater.update');
 
 /**
  * Language Installer model for the Joomla Core Installer.
@@ -184,8 +185,6 @@ class InstallationModelLanguages extends JModelLegacy
 	 */
 	protected function _getPackageUrl($remote_manifest)
 	{
-		jimport('joomla.updater.update');
-
 		$update = new JUpdate;
 		$update->loadFromXML($remote_manifest);
 		$package_url = trim($update->get('downloadurl', false)->_data);
