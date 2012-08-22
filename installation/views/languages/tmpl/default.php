@@ -14,7 +14,7 @@ $ver = new JVersion;
 <form action="index.php" method="post" id="adminForm" class="form-validate form-horizontal">
 	<div class="btn-toolbar">
 		<div class="btn-group pull-right">
-			<a class="btn" href="#" onclick="return Install.goToPage('complete');" rel="prev" title="<?php echo JText::_('JPrevious'); ?>"><i class="icon-arrow-left"></i> <?php echo JText::_('JPrevious'); ?></a>
+			<a class="btn" href="#" onclick="return Install.goToPage('remove');" rel="prev" title="<?php echo JText::_('JPrevious'); ?>"><i class="icon-arrow-left"></i> <?php echo JText::_('JPrevious'); ?></a>
 			<a  class="btn btn-primary" href="#" onclick="Install.submitform();" rel="next" title="<?php echo JText::_('JNext'); ?>"><i class="icon-arrow-right icon-white"></i> <?php echo JText::_('JNext'); ?></a>
 		</div>
 	</div>
@@ -22,7 +22,7 @@ $ver = new JVersion;
 	<hr class="hr-condensed" />
 	<?php if(!$this->items) : ?>
 		<p><?php echo JText::_('INSTL_LANGUAGES_WARNING_NO_INTERNET') ?></p>
-		<p><a href="#" class="btn btn-primary" onclick="return Install.goToPage('complete');"><i class="icon-arrow-left icon-white"></i> <?php echo JText::_('INSTL_LANGUAGES_WARNING_BACK_BUTTON'); ?></a></p>
+		<p><a href="#" class="btn btn-primary" onclick="return Install.goToPage('remove');"><i class="icon-arrow-left icon-white"></i> <?php echo JText::_('INSTL_LANGUAGES_WARNING_BACK_BUTTON'); ?></a></p>
 		<p><?php echo JText::_('INSTL_LANGUAGES_WARNING_NO_INTERNET2') ?></p>
 	<?php else : ?>
 		<p><?php echo JText::_('INSTL_LANGUAGES_DESC'); ?></p>
