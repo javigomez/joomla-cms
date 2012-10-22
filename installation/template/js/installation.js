@@ -265,6 +265,10 @@ var Installation = new Class({
  	 */
 	removeFolder: function(el) {
 		el = document.id(el);
+        if(document.getElementById("languages"))
+        {
+            document.id(languages).fade('out');
+        }
 		var req = new Request.JSON({
 			url: this.baseUrl + '?task=setup.removeFolder',
 			data: document.id(el.form),

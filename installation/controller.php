@@ -58,18 +58,24 @@ class InstallationController extends JControllerLegacy
 		$view = $this->getView($vName, $vFormat);
 		if ($view)
 		{
-			$model = $this->getModel('Setup', 'InstallationModel', array('dbo' => null));
-			$sufficient = $model->getPhpOptionsSufficient();
-
+			$checkOptions = null;
 			switch ($vName)
 			{
 				case 'preinstall':
+					$model = $this->getModel('Setup', 'InstallationModel', array('dbo' => null));
+					$sufficient = $model->getPhpOptionsSufficient();
 					$checkOptions = false;
 					if ($sufficient) {
 						$this->setRedirect('index.php');
 					}
 					break;
+				case 'languages':
+				case 'defaultlanguage':
+					$model = $this->getModel('Languages', 'InstallationModel', array('dbo' => null));
+					break;
 				default:
+					$model = $this->getModel('Setup', 'InstallationModel', array('dbo' => null));
+					$sufficient = $model->getPhpOptionsSufficient();
 					$checkOptions = true;
 					if (!$sufficient) {
 						$this->setRedirect('index.php?view=preinstall');
