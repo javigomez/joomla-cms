@@ -23,10 +23,8 @@ defined('_JEXEC') or die;
 				<i class="icon-arrow-left"></i>
 				<?php echo JText::_('JPREVIOUS'); ?>
 			</a>
-			<?php
-			// Check if ther is any languages to list, if not you cannot move forward
-			if ($this->items->administrator) :
-				?>
+			<?php // Check if ther is any languages to list, if not you cannot move forward ?>
+			<?php if ($this->items->administrator) : ?>
 				<a
 					class="btn btn-primary"
 					href="#"
@@ -36,14 +34,14 @@ defined('_JEXEC') or die;
 					<i class="icon-arrow-right icon-white"></i>
 					<?php echo JText::_('JNEXT'); ?>
 				</a>
-				<?php endif; ?>
+			<?php endif; ?>
 		</div>
 	</div>
 	<h3><?php echo JText::_('INSTL_DEFAULTLANGUAGE_ADMINISTRATOR'); ?></h3>
 	<hr class="hr-condensed" />
 	<p><?php echo JText::_('INSTL_DEFAULTLANGUAGE_DESC'); ?></p>
 	<table class="table table-striped table-condensed">
-		<tbody>
+		<thead>
 		<tr>
 			<th>
 				<?php echo JText::_('INSTL_DEFAULTLANGUAGE_COLUMN_HEADER_SELECT'); ?>
@@ -55,7 +53,7 @@ defined('_JEXEC') or die;
 				<?php echo JText::_('INSTL_DEFAULTLANGUAGE_COLUMN_HEADER_TAG'); ?>
 			</th>
 		</tr>
-		</tbody>
+		</thead>
 		<tbody>
 			<?php foreach ($this->items->administrator as $lang) : ?>
 			<tr>
@@ -81,7 +79,7 @@ defined('_JEXEC') or die;
 	<hr class="hr-condensed" />
 	<p><?php echo JText::_('INSTL_DEFAULTLANGUAGE_DESC_FRONTEND'); ?></p>
 	<table class="table table-striped table-condensed">
-		<tbody>
+		<thead>
 		<tr>
 			<th>
 				<?php echo JText::_('INSTL_DEFAULTLANGUAGE_COLUMN_HEADER_SELECT'); ?>
@@ -93,7 +91,7 @@ defined('_JEXEC') or die;
 				<?php echo JText::_('INSTL_DEFAULTLANGUAGE_COLUMN_HEADER_TAG'); ?>
 			</th>
 		</tr>
-		</tbody>
+		</thead>
 		<tbody>
 		<?php foreach ($this->items->frontend as $lang) : ?>
 		<tr>
