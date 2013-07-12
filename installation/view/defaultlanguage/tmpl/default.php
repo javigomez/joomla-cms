@@ -113,7 +113,21 @@ defined('_JEXEC') or die;
 			<?php endforeach; ?>
 		</tbody>
 	</table>
-	<p><?php echo JText::_('INSTL_DEFAULTLANGUAGE_NOTE'); ?></p>
+	<div class="control-group">
+		<div class="control-label">
+			<label
+				for="jform_multilanguage"><?php echo JText::_('INSTL_DEFAULTLANGUAGE_ACTIVATE_MULTILANGUAGE') ?></label>
+		</div>
+		<div class="controls">
+			<fieldset id="jform_multilanguage" class="radio btn-group">
+				<input type="radio" id="activeMultilanguage1" name="activeMultilanguage" value="1" checked="checked">
+				<label for="activeMultilanguage1" class="btn"><?php echo JText::_('JYES') ?></label>
+				<input type="radio" id="activeMultilanguage0" name="activeMultilanguage" value="0" checked="checked">
+				<label for="activeMultilanguage0" class="btn active btn-danger"><?php echo JText::_('JNO') ?></label>
+			</fieldset>
+		</div>
+	</div>
 	<input type="hidden" name="task" value="setdefaultlanguage" />
+	<input type="hidden" name="activeMultilanguage1" value="1" />
 	<?php echo JHtml::_('form.token'); ?>
 </form>

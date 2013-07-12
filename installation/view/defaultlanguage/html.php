@@ -24,7 +24,7 @@ class InstallationViewDefaultlanguageHtml extends JViewHtml
 	 * @var    array
 	 * @since  3.1
 	 */
-	protected $items;
+	public $items;
 
 	/**
 	 * Redefine the model so the correct type hinting is available.
