@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fieldset>
+        <field name="activeMultilanguage" type="radio" id="activeMultilanguage" class="btn-group" default="1"
+		label="INSTL_DEFAULTLANGUAGE_ACTIVATE_MULTILANGUAGE"
+		filter="integer"
+		>
+		<option value="0">JNO</option>
+		<option value="1">JYES</option>
+        </field>
+    </fieldset>
+</form>
