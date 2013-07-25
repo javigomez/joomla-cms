@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package     Joomla.Installation
  * @subpackage  View
@@ -6,7 +7,6 @@
  * @copyright   Copyright (C) 2005 - 2013 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
-
 defined('_JEXEC') or die;
 
 /**
@@ -16,37 +16,38 @@ defined('_JEXEC') or die;
  * @subpackage  View
  * @since       3.1
  */
-class InstallationViewDefaultlanguageHtml extends JViewHtml
-{
-	/**
-	 * Container with all installed languages
-	 *
-	 * @var    array
-	 * @since  3.1
-	 */
-	public $items;
+class InstallationViewDefaultlanguageHtml extends JViewHtml {
 
-	/**
-	 * Redefine the model so the correct type hinting is available.
-	 *
-	 * @var     InstallationModelLanguages
-	 * @since   3.1
-	 */
-	protected $model;
+    /**
+     * Container with all installed languages
+     *
+     * @var    array
+     * @since  3.1
+     */
+    public $items;
 
-	/**
-	 * Method to render the view.
-	 *
-	 * @return  string  The rendered view.
-	 *
-	 * @since   3.1
-	 */
-	public function render()
-	{
-		$this->items = new stdClass;
-		$this->items->administrator = $this->model->getInstalledlangsAdministrator();
-		$this->items->frontend      = $this->model->getInstalledlangsFrontend();
+    /**
+     * Redefine the model so the correct type hinting is available.
+     *
+     * @var     InstallationModelLanguages
+     * @since   3.1
+     */
+    protected $model;
 
-		return parent::render();
-	}
+    /**
+     * Method to render the view.
+     *
+     * @return  string  The rendered view.
+     *
+     * @since   3.1
+     */
+    public function render() {
+        $this->items = new stdClass;
+        $this->items->administrator = $this->model->getInstalledlangsAdministrator();
+        $this->items->frontend = $this->model->getInstalledlangsFrontend();
+        $this->form = $this->model->getForm();
+        
+        return parent::render();
+    }
+
 }
