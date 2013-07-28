@@ -105,11 +105,14 @@ class InstallationControllerSetdefaultlanguage extends JControllerBase
 			// Enable plg_system_languagefilter
 
 			$query
-				->update($db->quoteName('#__extensions'))
-				->set($db->quoteName('enabled') . ' = ' . $db->quote(1))
-				->where($db->quoteName('extension_id') . ' = ' . $db->quote(422));
+				->update( '#__extensions' )
+				->set( 'enabled = 1' )
+				->where( 'name = ' . $db->quote('plg_system_languagefilter') )
+                                ->where( 'type = ' . $db->quote('plugin') );
 			$db->setQuery($query);
 
+//                      No se puede asegurar que el id del extension es siempre el mismo.                        
+//				->where($db->quoteName('extension_id') . ' = ' . $db->quote(422));
 			if (!$db->execute())
 			{
 				$app->enqueueMessage(JText::sprintf('INSTL_DEFAULTLANGUAGE_COULD_NOT_ENABLE_PLG_LANGUAGEFILTER', $frontend_lang));
@@ -119,15 +122,56 @@ class InstallationControllerSetdefaultlanguage extends JControllerBase
 
 			$query
 				->clear()
-				->update($db->quoteName('#__extensions'))
-				->set($db->quoteName('enabled') . ' = ' . $db->quote(1))
-				->where($db->quoteName('extension_id') . ' = ' . $db->quote(436));
+				->update( '#__extensions' )
+				->set( 'enabled = 1' )
+                                ->where( 'name = ' . $db->quote('plg_system_languagecode') )
+				->where( 'type = ' . $db->quote('plugin') );
 			$db->setQuery($query);
 
+//                      No se puede asegurar que el id del extension es siempre el mismo.                        
+//				->where($db->quoteName('extension_id') . ' = ' . $db->quote(436));                        
 			if (!$db->execute())
 			{
 				$app->enqueueMessage(JText::sprintf('INSTL_DEFAULTLANGUAGE_COULD_NOT_ENABLE_PLG_LANGUAGECODE', $frontend_lang));
 			}
+                        
+                        // Añadir los menus
+                        JLoader::registerPrefix('J', JPATH_PLATFORM . '/legacy');
+                        JTable::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_menus/tables/');
+                        
+                        $SiteLanguages = $model->getInstalledlangsFrontend();
+                        foreach(@$SiteLanguages as $SiteLang) {
+                            $menuTable = &JTable::getInstance('Type', 'JTableMenu');
+                               
+//                            $menuTable =& JTable::getInstance('menu', 'menusTable');
+                            $menuData = array(
+                                    'id'            => 0,
+                                    'menutype'      => 'mainmenu_'.$SiteLang->language,
+                                    'title'         => 'Main Menu ('.$SiteLang->language.')',
+                                    'description'   => 'The main menu for the site in language'. $SiteLang->name
+                                );
+                            
+                            // Bind the data.
+                            if (!$menuTable->bind($menuData))
+                            {
+                                    $app->enqueueMessage($menuTable->getError());
+                                    return false;
+                            }
+
+                            // Check the data.
+                            if (!$menuTable->check())
+                            {
+                                    $app->enqueueMessage($menuTable->getError());
+                                    return false;
+                            }
+
+                            // Store the data.
+                            if (!$menuTable->store())
+                            {
+                                    $app->enqueueMessage($menuTable->getError());
+                                    return false;
+                            }
+                        }
 		}
 
 		$r = new stdClass;
