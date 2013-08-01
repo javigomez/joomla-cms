@@ -130,44 +130,42 @@ class InstallationControllerSetdefaultlanguage extends JControllerBase
 			{
 				$app->enqueueMessage(JText::sprintf('INSTL_DEFAULTLANGUAGE_COULD_NOT_ENABLE_PLG_LANGUAGECODE', $frontend_lang));
 			}
-                        
-                        // Añadir los menus
-                        JLoader::registerPrefix('J', JPATH_PLATFORM . '/legacy');
-                        JTable::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_menus/tables/');
-                        
-                        $SiteLanguages = $model->getInstalledlangsFrontend();
-                        foreach(@$SiteLanguages as $SiteLang) {
-                            $menuTable = &JTable::getInstance('Type', 'JTableMenu');
-                               
-//                            $menuTable =& JTable::getInstance('menu', 'menusTable');
-                            $menuData = array(
-                                    'id'            => 0,
-                                    'menutype'      => 'mainmenu_'.$SiteLang->language,
-                                    'title'         => 'Main Menu ('.$SiteLang->language.')',
-                                    'description'   => 'The main menu for the site in language'. $SiteLang->name
-                                );
-                            
-                            // Bind the data.
-                            if (!$menuTable->bind($menuData))
-                            {
-                                    $app->enqueueMessage($menuTable->getError());
-                                    return false;
-                            }
 
-                            // Check the data.
-                            if (!$menuTable->check())
-                            {
-                                    $app->enqueueMessage($menuTable->getError());
-                                    return false;
-                            }
+			// Add menus
+			JLoader::registerPrefix('J', JPATH_PLATFORM . '/legacy');
+			JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_menus/tables/');
 
-                            // Store the data.
-                            if (!$menuTable->store())
-                            {
-                                    $app->enqueueMessage($menuTable->getError());
-                                    return false;
-                            }
-                        }
+			$siteLanguages = $model->getInstalledlangsFrontend();
+
+			foreach ($siteLanguages as $SiteLang)
+			{
+				$menuTable = JTable::getInstance('Type', 'JTableMenu');
+
+				$menuData = array(
+					'id'          => 0,
+					'menutype'    => 'mainmenu_' . $SiteLang->language,
+					'title'       => 'Main Menu (' . $SiteLang->language . ')',
+					'description' => 'The main menu for the site in language' . $SiteLang->name
+				);
+
+				// Bind the data.
+				if (!$menuTable->bind($menuData))
+				{
+					$app->enqueueMessage(JText::_('INSTL_DEFAULTLANGUAGE_MULTILANGUAGE_COULDNT_CREATE_MENUS') . ': ' . $menuTable->getError(), 'error');
+				}
+
+				// Check the data.
+				if (!$menuTable->check())
+				{
+					$app->enqueueMessage(JText::_('INSTL_DEFAULTLANGUAGE_MULTILANGUAGE_COULDNT_CREATE_MENUS') . ': ' . $menuTable->getError(), 'error');
+				}
+
+				// Store the data.
+				if (!$menuTable->store())
+				{
+					$app->enqueueMessage(JText::_('INSTL_DEFAULTLANGUAGE_MULTILANGUAGE_COULDNT_CREATE_MENUS') . ': ' . $menuTable->getError(), 'error');
+				}
+			}
 		}
 
 		$r = new stdClass;
