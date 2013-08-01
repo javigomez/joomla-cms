@@ -95,24 +95,22 @@ class InstallationControllerSetdefaultlanguage extends JControllerBase
 		}
 
 		// Check for if user has activated the multilingual site
-		$activeMultilanguage = $this->input->getString('activeMultilanguage1', false);
+		$activeMultilanguage = $this->input->getString('activeMultilanguage', false);
 
 		if ($activeMultilanguage)
 		{
-			$db		= JFactory::getDbo();
-			$query	= $db->getQuery(true);
+			$db    = JFactory::getDbo();
+			$query = $db->getQuery(true);
 
 			// Enable plg_system_languagefilter
 
 			$query
-				->update( '#__extensions' )
-				->set( 'enabled = 1' )
-				->where( 'name = ' . $db->quote('plg_system_languagefilter') )
-                                ->where( 'type = ' . $db->quote('plugin') );
+				->update('#__extensions')
+				->set('enabled = 1')
+				->where('name = ' . $db->quote('plg_system_languagefilter'))
+				->where('type = ' . $db->quote('plugin'));
 			$db->setQuery($query);
 
-//                      No se puede asegurar que el id del extension es siempre el mismo.                        
-//				->where($db->quoteName('extension_id') . ' = ' . $db->quote(422));
 			if (!$db->execute())
 			{
 				$app->enqueueMessage(JText::sprintf('INSTL_DEFAULTLANGUAGE_COULD_NOT_ENABLE_PLG_LANGUAGEFILTER', $frontend_lang));
@@ -122,14 +120,12 @@ class InstallationControllerSetdefaultlanguage extends JControllerBase
 
 			$query
 				->clear()
-				->update( '#__extensions' )
-				->set( 'enabled = 1' )
-                                ->where( 'name = ' . $db->quote('plg_system_languagecode') )
-				->where( 'type = ' . $db->quote('plugin') );
+				->update('#__extensions')
+				->set('enabled = 1')
+				->where('name = ' . $db->quote('plg_system_languagecode'))
+				->where('type = ' . $db->quote('plugin'));
 			$db->setQuery($query);
 
-//                      No se puede asegurar que el id del extension es siempre el mismo.                        
-//				->where($db->quoteName('extension_id') . ' = ' . $db->quote(436));                        
 			if (!$db->execute())
 			{
 				$app->enqueueMessage(JText::sprintf('INSTL_DEFAULTLANGUAGE_COULD_NOT_ENABLE_PLG_LANGUAGECODE', $frontend_lang));
