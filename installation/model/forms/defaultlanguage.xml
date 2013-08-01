@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
 	<fieldset>
-		<field name="activeMultilanguage"
+		<field name="activateMultilanguage"
 		       type="radio"
-		       id="activeMultilanguage"
+		       id="activateMultilanguage"
 		       class="btn-group"
 		       label="INSTL_DEFAULTLANGUAGE_ACTIVATE_MULTILANGUAGE"
 		       filter="integer"

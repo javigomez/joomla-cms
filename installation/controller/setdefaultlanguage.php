@@ -94,8 +94,9 @@ class InstallationControllerSetdefaultlanguage extends JControllerBase
 			$app->enqueueMessage(JText::sprintf('INSTL_DEFAULTLANGUAGE_FRONTEND_SET_DEFAULT', $frontend_lang));
 		}
 
-		// Check for if user has activated the multilingual site
-		$activeMultilanguage = $this->input->getString('activeMultilanguage', false);
+		// Check the form
+		$data   = $this->input->post->get('jform', array(), 'array');
+		$activeMultilanguage = (int) $data['activateMultilanguage'];
 
 		if ($activeMultilanguage)
 		{

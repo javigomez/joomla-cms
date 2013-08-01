@@ -113,14 +113,13 @@ defined('_JEXEC') or die;
     <div class="control-group">
         <div class="control-group">
             <div class="control-label">
-                <?php echo $this->form->getLabel('activeMultilanguage'); ?>
+                <?php echo $this->form->getLabel('activateMultilanguage'); ?>
             </div>
             <div class="controls">
-                <?php echo $this->form->getInput('activeMultilanguage'); ?>
+                <?php echo $this->form->getInput('activateMultilanguage'); ?>
             </div>
         </div>
     </div>
     <input type="hidden" name="task" value="setdefaultlanguage" />
-    <input type="hidden" name="activeMultilanguage1" value="1" />
     <?php echo JHtml::_('form.token'); ?>
 </form>
