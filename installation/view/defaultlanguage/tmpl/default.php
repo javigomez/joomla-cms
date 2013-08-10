@@ -87,6 +87,9 @@ defined('_JEXEC') or die;
                 <th>
                     <?php echo JText::_('INSTL_DEFAULTLANGUAGE_COLUMN_HEADER_TAG'); ?>
                 </th>
+                <th>
+                    <?php echo JText::_('INSTL_DEFAULTLANGUAGE_COLUMN_HEADER_MENU_HOME'); ?>
+                </th>                
             </tr>
         </thead>
         <tbody>
@@ -105,6 +108,12 @@ defined('_JEXEC') or die;
                     </td>
                     <td align="center">
                         <?php echo $lang->language; ?>
+                    </td>
+                    <td align="left">
+                        <?php
+                        $newlanguage = JLanguage::getInstance($lang->language, false);
+                        ?>
+                        <input type="text" class="inputbox" name="menu[<?php echo $lang->language; ?>]" value="<?php echo $newlanguage->_('INSTL_DEFAULTLANGUAGE_MENU_HOME_TITLE'); ?>" />
                     </td>
                 </tr>
             <?php endforeach; ?>
