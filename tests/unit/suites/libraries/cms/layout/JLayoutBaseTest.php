@@ -56,4 +56,20 @@ class JLayoutBaseTest extends PHPUnit_Framework_TestCase
 			'JLayoutBase::render does not render an output'
 		);
 	}
+
+	/**
+	 * Test the getDebugMessages
+	 *
+	 * @return  void
+	 *
+	 * @since   3.3
+	 */
+	public function testGetDebugMessages()
+	{
+		$this->assertEquals(
+			$this->object->getDebugMessages(),
+			$this->equalTo(array()),
+			'testGetDebugMessages returns an empty array'
+		);
+	}
 }
